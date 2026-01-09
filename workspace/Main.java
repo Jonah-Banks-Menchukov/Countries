@@ -31,7 +31,14 @@ public class Main
   {
     // Open the data file. Please note that the file structure we're working with requires the full file path as shown here unlike what you saw in runestone where the file name was sufficient.
     File file = new File("/workspaces/Countries/workspace/countries-data.csv");
-    
+    Scanner s=new Scanner(file);
+    for(int i=0;i<10;i++){
+      String e=S.nextLine();
+      String[] sArray=e.split(",");
+      Country c=new Country(sArray[0],sArray[1],sArray[2],sArray[3]);
+      countryArray[i]=c;
+    }
+    s.close();
     //create a scanner and a loop to read from the file until you've read everything.
     // inside the loop you'll need to read in a line from the file and use "split" to break up the data into destinct parts.
     // create a new Country using your constructor with 4 arguments (each of the arguments is a different part of the line you've read in)
@@ -45,9 +52,9 @@ public class Main
   */
   public void showCountry() {
     // Get the country at index from countryArray
-    
+    Country myCountry=countryArray[index];
     // Use its get method to get the its image file name and save it into imagefile variable below instead of worldmap.jpg.
-    String imagefile = "worldmap.jpg";
+    String imagefile = myCountry.getImageFile();
     // Use the following code to create an new Image Icon and put it into the GUI
     img = new ImageIcon("/workspaces/Countries/workspace/"+imagefile);
     imageLabel.setIcon(img);
@@ -56,22 +63,38 @@ public class Main
   /* nextButton should increment index. If the index is greater than 9, reset it back to 0. Clear the outputLabel to empty string using setText, and call showCountry();*/
   public void nextButtonClick()
   {
-    
+    if (index>9){
+      index=0;
+    }else{
+      index++;
+    }
   }
   
-  /* reviewButton should get the country at index from the countryArray, call its toString() method and save the result, print it out with System.out.println and as an argument to outputLabel.setText( text to print out ); */
+  /* reviewButton should get the country at index from 
+  *the countryArray, call its toString() method and save 
+  *the result, print it out with System.out.println and 
+  *as an argument to outputLabel.setText( text to print 
+  *out ); */
   public void reviewButtonClick()
   {
-     
+    String c=countryArray[index].toString();
+     System.out.println(c);
+     outputLabel.setText(c);
   }
 
-  /* quizButton should clear the outputLabel (outputLabel.setText to empty string), get the country at index from countryArray, print out a question about it like What country is this? and/or What's this country's capital?. Get the user's answer using scan.nextLine() and check if it is equal to the country's data using its get methods and print out correct or incorrect.
+  /* quizButton should clear the outputLabel 
+  (outputLabel.setText to empty string), get the 
+  country at index from countryArray, print out a 
+  question about it like What country is this? and/or 
+  What's this country's capital?. Get the user's answer 
+  using scan.nextLine() and check if it is equal to the 
+  country's data using its get methods and print out 
+  correct or incorrect.
   */
   public void quizButtonClick()
   {
+    
     Scanner scan = new Scanner(System.in); 
-    
-    
     
   }
 
