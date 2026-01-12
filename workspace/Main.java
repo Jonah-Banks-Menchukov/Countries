@@ -9,6 +9,7 @@ public class Main
 
   // array of 10 Country objects
   private Country[] countryArray = new Country[10];  
+  private String[] questions={"What country is this?","What is the capital of this country?","What language do they speak here?"};
   // index of current shown country
   private int index = 0;
 
@@ -17,7 +18,7 @@ public class Main
   private ImageIcon img;
   private JLabel imageLabel;
   private JLabel outputLabel;
-  private JTextArea userInput;
+  private JTextArea userInput; 
   
   public static void main(String[] args) {
     // Create the GUI
@@ -27,25 +28,27 @@ public class Main
   }
 
   /* loadCountries() reads in the data from the countries-data.csv file and fills in the countryArray with data. You need to add the loop that reads in the country data into the array. */
-  public void loadCountries() 
+  public void loadCountries()
   {
     // Open the data file. Please note that the file structure we're working with requires the full file path as shown here unlike what you saw in runestone where the file name was sufficient.
+    try{
     File file = new File("/workspaces/Countries/workspace/countries-data.csv");
     Scanner s=new Scanner(file);
     for(int i=0;i<10;i++){
-      String e=S.nextLine();
+      String e=s.nextLine();
       String[] sArray=e.split(",");
       Country c=new Country(sArray[0],sArray[1],sArray[2],sArray[3]);
       countryArray[i]=c;
     }
     s.close();
+  } catch(IOException e){
+    System.out.println("IOException");
+  }
     //create a scanner and a loop to read from the file until you've read everything.
     // inside the loop you'll need to read in a line from the file and use "split" to break up the data into destinct parts.
     // create a new Country using your constructor with 4 arguments (each of the arguments is a different part of the line you've read in)
     // inside the loop, set countryArray[i] to the created Country object
     //after running this method your array should contain all 10 countries from inside the countries-data file.
-     
-    
   }
 
   /* showCountry() will show the image associated with the current country. It should get the country at index from the countryArray. It should use its get method to get its image file name and use the code below to put the image in the GUI.
@@ -93,9 +96,17 @@ public class Main
   */
   public void quizButtonClick()
   {
-    
-    Scanner scan = new Scanner(System.in); 
-    
+    String question=questions[(int)(Math.random()*3)];
+    Scanner scan = new Scanner(System.in);
+    outputLabel.setText(question);
+    Country thisCountry=countryArray[index];
+    String userAns=scan.nextLine();
+   scan.close(); 
+   if(question.equals("What country is this?")&&userAns.equals(thisCountry.getCapital())){
+      outputLabel.setText("Correct");
+   }else if(question.equals("What country is this?")&&userAns.equals(thisCountry.getCapital())){
+    outputLabel.setText("Correct");
+   }
   }
 
 
@@ -147,6 +158,4 @@ public Main() {
     }
    });
 }
-  
-
 }

@@ -1,3 +1,5 @@
+//Jonah Banks
+//This class stores the country constructor and methods
 public class Country
 {
   // add private instance variables for the name, capital, language, and image file.
