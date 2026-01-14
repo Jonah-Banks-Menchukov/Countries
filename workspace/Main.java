@@ -3,7 +3,6 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
 import java.io.*;
-
 public class Main 
 {
 
@@ -11,7 +10,7 @@ public class Main
   private Country[] countryArray = new Country[10];  
   private String[] questions={"What country is this?","What is the capital of this country?","What language do they speak here?"};
   // index of current shown country
-  private int index = 0;
+  private int index = (int)(Math.random()*11);
 
   // GUI elements
   private JFrame jFrame = new JFrame("Countries");
@@ -42,7 +41,7 @@ public class Main
     }
     s.close();
   } catch(IOException e){
-    System.out.println("IOException");
+    System.out.println("Exception: "+e.toString());
   }
     //create a scanner and a loop to read from the file until you've read everything.
     // inside the loop you'll need to read in a line from the file and use "split" to break up the data into destinct parts.
@@ -66,11 +65,11 @@ public class Main
   /* nextButton should increment index. If the index is greater than 9, reset it back to 0. Clear the outputLabel to empty string using setText, and call showCountry();*/
   public void nextButtonClick()
   {
+    index++;
     if (index>9){
       index=0;
-    }else{
-      index++;
     }
+    showCountry();
   }
   
   /* reviewButton should get the country at index from 
@@ -96,19 +95,27 @@ public class Main
   */
   public void quizButtonClick()
   {
-    String question=questions[(int)(Math.random()*3)];
-    Scanner scan = new Scanner(System.in);
-    outputLabel.setText(question);
+    String userAns="";
+    Scanner s=new Scanner(System.in);
     Country thisCountry=countryArray[index];
-    String userAns=scan.nextLine();
-   scan.close(); 
+    String question=questions[(int)(Math.random()*3)];
+    System.out.println(question);
+  while(userAns.equals("")){
+  if(s.hasNext()){
+    userAns=s.nextLine();
+  }
+  }
+    s.close();   
    if(question.equals("What country is this?")&&userAns.equals(thisCountry.getCapital())){
-      outputLabel.setText("Correct");
+      System.out.println("Correct");
    }else if(question.equals("What country is this?")&&userAns.equals(thisCountry.getCapital())){
-    outputLabel.setText("Correct");
+    System.out.println("Correct");
+   }else if(question.equals("What language do they speak here?")&&userAns.equals(thisCountry.getLanguage())){
+    System.out.println("Correct");
+   }else{
+    System.out.println("Incorrect");
    }
   }
-
 
 
 

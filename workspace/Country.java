@@ -5,6 +5,12 @@ public class Country
   // add private instance variables for the name, capital, language, and image file.
   private String name, capital, language, imageFile;
   // add constructors
+  public Country(){
+    this.name="Fantasyland";
+    this.capital="Nowhere";
+    this.language="Gobbledegook";
+    this.imageFile=
+  }
   public Country(String name, String capital, String language,String imageFile){
     this.name=name;
     this.capital=capital;
