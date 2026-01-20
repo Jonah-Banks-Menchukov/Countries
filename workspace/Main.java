@@ -1,3 +1,5 @@
+//Jonah Banks
+//This class has main method, gui construction, and button clickes
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -10,7 +12,7 @@ public class Main
   private Country[] countryArray = new Country[10];  
   private String[] questions={"What country is this?","What is the capital of this country?","What language do they speak here?"};
   // index of current shown country
-  private int index = (int)(Math.random()*11);
+  private int index = (int)(Math.random()*10);
 
   // GUI elements
   private JFrame jFrame = new JFrame("Countries");
@@ -18,6 +20,8 @@ public class Main
   private JLabel imageLabel;
   private JLabel outputLabel;
   private JTextArea userInput; 
+
+  Scanner s=new Scanner(System.in);
   
   public static void main(String[] args) {
     // Create the GUI
@@ -69,6 +73,7 @@ public class Main
     if (index>9){
       index=0;
     }
+    outputLabel.setText("");
     showCountry();
   }
   
@@ -96,16 +101,21 @@ public class Main
   public void quizButtonClick()
   {
     String userAns="";
-    Scanner s=new Scanner(System.in);
+  
     Country thisCountry=countryArray[index];
     String question=questions[(int)(Math.random()*3)];
     System.out.println(question);
-  while(userAns.equals("")){
-  if(s.hasNext()){
-    userAns=s.nextLine();
+  boolean askAgain = true;
+  while(askAgain){
+    System.out.println("here");
+    try{
+      userAns=s.nextLine();
+      askAgain = false;
+  }catch(NoSuchElementException e){
+    askAgain = true;
   }
-  }
-    s.close();   
+}
+  System.out.println(userAns);
    if(question.equals("What country is this?")&&userAns.equals(thisCountry.getCapital())){
       System.out.println("Correct");
    }else if(question.equals("What country is this?")&&userAns.equals(thisCountry.getCapital())){

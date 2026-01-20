@@ -9,7 +9,7 @@ public class Country
     this.name="Fantasyland";
     this.capital="Nowhere";
     this.language="Gobbledegook";
-    this.imageFile=
+    this.imageFile="";
   }
   public Country(String name, String capital, String language,String imageFile){
     this.name=name;
